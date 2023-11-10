@@ -28,7 +28,21 @@ class _ShopHomeState extends State<ShopHome> {
     final homeProvider =
         Provider.of<HomeScreenController>(context, listen: true);
     return Scaffold(
-      drawer: Drawer(),
+      drawer: Drawer(
+        child: ListView(padding: EdgeInsets.zero, children: [
+          Center(
+              child: Column(children: [
+            Container(child: Image.asset("assets/images/img.png")),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              "Welcome To Shop Check",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ]))
+        ]),
+      ),
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
@@ -52,13 +66,16 @@ class _ShopHomeState extends State<ShopHome> {
         ],
       ),
       body: homeProvider.isLoading
-          ? Center(child:  LoadingAnimationWidget.inkDrop(
-                    color: Color(0xff7C040D), size: 30))
+          ? Center(
+              child: LoadingAnimationWidget.inkDrop(
+                  color: Color(0xff7C040D), size: 30))
           : RefreshIndicator(
-            onRefresh: () { return Future.wait([
-                    homeProvider.fetchData(),
-                  ]);},
-            child: Column(
+              onRefresh: () {
+                return Future.wait([
+                  homeProvider.fetchData(),
+                ]);
+              },
+              child: Column(
                 children: [
                   SizedBox(
                     height: MediaQuery.of(context).size.height * .01,
@@ -87,7 +104,8 @@ class _ShopHomeState extends State<ShopHome> {
                                   ));
                                 },
                                 child: Container(
-                                  width: MediaQuery.of(context).size.width * 0.4,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.4,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
                                     boxShadow: [
@@ -102,7 +120,8 @@ class _ShopHomeState extends State<ShopHome> {
                                   ),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Column(
                                         children: [
@@ -113,7 +132,9 @@ class _ShopHomeState extends State<ShopHome> {
                                                   BorderRadius.circular(5),
                                               image: DecorationImage(
                                                   image: NetworkImage(homeProvider
-                                                      .shop[index].images[0] ?? "https://i.imgur.com/kg1ZhhH.jpeg"),
+                                                          .shop[index]
+                                                          .images[0] ??
+                                                      "https://i.imgur.com/kg1ZhhH.jpeg"),
                                                   fit: BoxFit.cover),
                                             ),
                                           ),
@@ -123,7 +144,8 @@ class _ShopHomeState extends State<ShopHome> {
                                         height: 8,
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.only(left: 5.0),
+                                        padding:
+                                            const EdgeInsets.only(left: 5.0),
                                         child: Text(
                                           homeProvider.shop[index].title,
                                           style: TextStyle(
@@ -136,7 +158,8 @@ class _ShopHomeState extends State<ShopHome> {
                                         height: 5,
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.only(left: 5.0),
+                                        padding:
+                                            const EdgeInsets.only(left: 5.0),
                                         child: Text(
                                             "MRP : ${homeProvider.shop[index].price}"),
                                       )
@@ -150,7 +173,7 @@ class _ShopHomeState extends State<ShopHome> {
                   )
                 ],
               ),
-          ),
+            ),
     );
   }
 }

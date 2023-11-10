@@ -187,22 +187,39 @@ class _DetailscreenState extends State<Detailscreen> {
                       ),
                       InkWell(
                         onTap: () {
-                          return Provider.of<ShopProvider>(context,
-                                  listen: false)
-                              .additem(
-                            ShopModelClass(
-                              pName: homeProvider.shop[widget.imageIndex].title,
-                              pImage: homeProvider
-                                  .shop[widget.imageIndex].images[0],
-                              pPrice: (counter.current_Index *
-                                      homeProvider
-                                          .shop[widget.imageIndex].price)
-                                  .toInt(),
-                              pQuantity: counter.current_Index,
-                              inPrice:
-                                  homeProvider.shop[widget.imageIndex].price,
-                            ),
-                          );
+                          if (counter.current_Index <= 0) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                    'Please select a quantity greater than zero.'),
+                                duration: Duration(seconds: 2),
+                              ),
+                            );
+                          } else {
+                            Provider.of<ShopProvider>(context, listen: false)
+                                .additem(
+                              ShopModelClass(
+                                pName:
+                                    homeProvider.shop[widget.imageIndex].title,
+                                pImage: homeProvider
+                                    .shop[widget.imageIndex].images[0],
+                                pPrice: (counter.current_Index *
+                                        homeProvider
+                                            .shop[widget.imageIndex].price)
+                                    .toInt(),
+                                pQuantity: counter.current_Index,
+                                inPrice:
+                                    homeProvider.shop[widget.imageIndex].price,
+                              ),
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content:
+                                    Center(child: Text('Item added to cart')),
+                                duration: Duration(seconds: 2),
+                              ),
+                            );
+                          }
                         },
                         child: Container(
                           height: 50,
