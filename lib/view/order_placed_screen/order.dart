@@ -28,7 +28,7 @@ class _OrderPlacedState extends State<OrderPlaced> {
                     builder: (context) =>ShopHome(),
                   ));
                 },
-                child: Text("Continue Shooping"),
+                child: Text("Continue Shopping"),
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
               )
             ],

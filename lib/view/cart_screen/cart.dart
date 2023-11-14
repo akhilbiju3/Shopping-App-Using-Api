@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sampleproviderproject/provider/provider_class.dart';
 import 'package:sampleproviderproject/view/cart_screen/cart_screen_widget/cart_screen_widget.dart';
-import 'package:sampleproviderproject/view/oder_placed_screen/order.dart';
+import 'package:sampleproviderproject/view/order_placed_screen/order.dart';
 
 class Cartscreen extends StatefulWidget {
   const Cartscreen({super.key});
